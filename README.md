@@ -14,6 +14,24 @@ Dimensions: 4 hp, 21mm deep.
 Power specifications: Requires +12v (at 100 mA) and -12v (at 10 mA). The module features several protections against accidental reverse power connection: First, a keyed 10-pin Eurorack standard connector, second, automatically resetting fuses, and thirdly, protection diodes.
 CV Inputs are designed for 0-5v, with reasonable over/undervoltage protection built-in.
 
+
+#### Compiling the code
+My preference is to use Visual Studio Code:
+1. Install the Microsoft "Arduino for Visual Studio Code" extension
+2. Add the Teensy packages. You can accomplish this in the "Arduino for Visual Studio Code" extension settings by adding the URL https://www.pjrc.com/teensy/package_teensy_index.json to the "Arduino: Additional Urls, Additional URLs for 3rd party packages." setting.
+3. The following file contents, placed into the repo under the filename .vscode\arduino.json helps with other details:
+```
+{
+    "sketch": "Software\\RawWavesV2\\RawWavesV2.ino",
+    "configuration": "usb=serial,speed=600,opt=o2std,keys=en-us",
+    "board": "teensy:avr:teensy40",
+    "output": "ArduinoOutput\\RawWavesV2",
+    "port": "COM3"
+}
+```
+4. In VS Code, activate the Command Palette (typically by pressing F1), and choose "Ardunio: Verify".
+5. If all codes well, the compiled output should appear in the repo directory, under ArduinoOutput\RawWavesV2
+
 #### License  
 Raw Waves is Open Hardware. It is a derivate work of ["Radio Music", by Tom Whitwell](https://github.com/TomWhitwell/RadioMusic). 
 All hardware and software design in this project is Creative Commons licensed by Jim Mulvey: [CC-BY-SA: Attribution / ShareAlike](https://creativecommons.org/licenses/by-sa/3.0/)
