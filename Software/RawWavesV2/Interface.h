@@ -70,7 +70,7 @@ private:
 	AnalogInput startCVInput;
 	AnalogInput startPotInput;
 
-	Button resetButton;
+	Bounce2::Button resetButton;
 	elapsedMillis buttonTimer = 0;
 
 	uint16_t changes = 0;
