@@ -1,0 +1,33 @@
+name: Compile Teensy 4 firmware
+
+# Test on this CI branch, plus any PR and pushes to main.
+# Also runnable on demand from the Actions tab.
+on:
+  push:
+    branches:
+      - main
+      - ci/teensy-compile
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile RawWavesV2 sketch
+        uses: arduino/compile-sketches@v1
+        with:
+          # Teensy 4.0. Options mirror the local VS Code arduino.json:
+          # usb=serial, speed=600 MHz, opt=o2std, keys=en-us
+          fqbn: "teensy:avr:teensy40:usb=serial,speed=600,opt=o2std,keys=en-us"
+          platforms: |
+            - name: "teensy:avr"
+              source-url: "https://www.pjrc.com/teensy/package_teensy_index.json"
+          sketch-paths: |
+            - Software/RawWavesV2
+          # The Teensy platform bundles Audio, Bounce2, SD, SPI, Wire and EEPROM,
+          # so no extra libraries need to be installed here.
+          verbose: true
