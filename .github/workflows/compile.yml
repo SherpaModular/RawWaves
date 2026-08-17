@@ -1,0 +1,54 @@
+name: Compile Teensy 4 firmware
+
+# Test on this CI branch, plus any PR and pushes to main.
+# Also runnable on demand from the Actions tab.
+on:
+  push:
+    branches:
+      - main
+      - ci/teensy-compile
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FQBN: "teensy:avr:teensy40:usb=serial,speed=600,opt=o2std,keys=en-us"
+  SKETCH: "Software/RawWavesV2"
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up arduino-cli
+        uses: arduino/setup-arduino-cli@v2
+
+      - name: Install Teensy platform
+        run: |
+          arduino-cli config init
+          arduino-cli config add board_manager.additional_urls \
+            https://www.pjrc.com/teensy/package_teensy_index.json
+          arduino-cli core update-index
+          arduino-cli core install teensy:avr
+
+      - name: Compile RawWavesV2 sketch
+        run: |
+          # Options mirror the local VS Code arduino.json:
+          # usb=serial, speed=600 MHz, opt=o2std, keys=en-us.
+          # The Teensy platform bundles Audio, Bounce2, SD, SPI, Wire and EEPROM.
+          arduino-cli compile \
+            --fqbn "$FQBN" \
+            --output-dir build \
+            --verbose \
+            "$SKETCH"
+
+      - name: Upload compiled firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: RawWavesV2-firmware
+          path: |
+            build/*.hex
+            build/*.elf
+          retention-days: 14
+          if-no-files-found: error
