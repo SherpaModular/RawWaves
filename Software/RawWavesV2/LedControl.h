@@ -5,13 +5,14 @@
  * Raw Waves LED control
  *
  * 4 LEDs across the top and 1 reset LED.
+ * Names match the PCB reference designators: LED1 is leftmost, LED4 is rightmost.
  *
  */
-#define LED0 2 // was 6 before PCB change
-#define LED1 3 // was 5 before PCB change
+#define LED1 5 // leftmost
 #define LED2 4
-#define LED3 5 // was 3 before PCB change
-#define RESET_LED 6 // Reset LED indicator. Was 11 in Teensy 3.2 but conflicts with the SD card in Teensy 4 // was 2 before PCB change
+#define LED3 3
+#define LED4 2 // rightmost
+#define RESET_LED 6 // Reset LED indicator (RESET_LED1 on PCB). Was 11 in Teensy 3.2 but conflicts with the SD card in Teensy 4
 
 class LedControl {
 

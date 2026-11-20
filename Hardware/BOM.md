@@ -18,7 +18,7 @@
 | U2                             | SOIC-8_3.9x4.9mm_P1.27mm  | 1        | PT8211              |
 | R11                            | R_0603_1608Metric         | 1        | 120k, 1%            |
 | U5                             | SOIC-8_3.9x4.9mm_P1.27mm  | 1        | MCP6002             |
-| R7,R6                          | R_0603_1608Metric         | 2        | 5.6k, 1%            |
+| R7,R6                          | R_0603_1608Metric         | 2        | 8.2k, 1%            |
 | U4                             | SOT-223-3_TabPin2         | 1        | LM1117MP-5.0        |
 | Q1                             | SOT-23                    | 1        | MMBT3904            |
 | U6                             | SOIC-8_3.9x4.9mm_P1.27mm  | 1        | TL072               |
